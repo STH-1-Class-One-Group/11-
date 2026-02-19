@@ -1,11 +1,89 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>프로젝트 시작</title>
+    <title>육전 만들기 MVP</title>
+    <style>
+        body { margin: 0; font-family: 'Pretendard', sans-serif; background-color: #f5f5f5; display: flex; justify-content: center; }
+        .mobile-frame { width: 375px; height: 812px; background: white; position: relative; overflow: hidden; box-shadow: 0 0 20px rgba(0,0,0,0.1); }
+        .screen { display: none; width: 100%; height: 100%; flex-direction: column; }
+        .screen.active { display: flex; }
+
+        /* 피그마 헤더 컬러 반영 */
+        .header { height: 180px; display: flex; align-items: center; justify-content: center; color: white; font-size: 26px; font-weight: 800; }
+        #landing .header { background-color: #2ecc71; }      /* 초록 */
+        #definition .header { background-color: #e67e22; }   /* 주황 */
+        #ingredients .header { background-color: #6c5ce7; }  /* 보라 */
+        #recipe .header { background-color: #f1c40f; }       /* 노랑 */
+        #tips .header { background-color: #9b59b6; }        /* 자주 */
+
+        .body { flex: 1; padding: 30px; background-color: #e0e0e0; font-size: 18px; line-height: 1.6; }
+        ul { padding-left: 20px; }
+        li { margin-bottom: 15px; }
+
+        /* 버튼 이름: start-button, next-button 등 반영 */
+        .next-btn { 
+            position: absolute; bottom: 50px; left: 50%; transform: translateX(-50%);
+            width: 240px; height: 60px; background: white; border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: bold; cursor: pointer; border: 2px solid #333;
+        }
+    </style>
 </head>
 <body>
-    <h1>Hello World!</h1>
+    <div class="mobile-frame">
+        <div id="landing" class="screen active">
+            <div class="header">육전 만들기</div>
+            <div class="body"><p>집에서 즐기는 고소한 육전,<br>지금 시작해볼까요?</p></div>
+            <div class="next-btn" id="start-button" onclick="show('definition')">시작하기</div>
+        </div>
+
+        <div id="definition" class="screen">
+            <div class="header">육전 정의</div>
+            <div class="body"><p>소고기를 얇게 저며 밀가루와 달걀물을 입혀 부친 전입니다.<br><br>특징: 명절/잔치 음식</p></div>
+            <div class="next-btn" onclick="show('ingredients')">다음으로</div>
+        </div>
+
+        <div id="ingredients" class="screen">
+            <div class="header">재료</div>
+            <div class="body">
+                <ul>
+                    <li>소고기 (부채살 300g)</li>
+                    <li>계란 (3알)</li>
+                    <li>밀가루 (1컵)</li>
+                    <li>소금/후추 (약간)</li>
+                </ul>
+            </div>
+            <div class="next-btn" onclick="show('recipe')">다음으로</div>
+        </div>
+
+        <div id="recipe" class="screen">
+            <div class="header">만드는 법</div>
+            <div class="body">
+                <ul>
+                    <li>1. 핏물 제거 및 밑간</li>
+                    <li>2. 밀가루 얇게 입히기</li>
+                    <li>3. 달걀물 적셔 약불 굽기</li>
+                </ul>
+            </div>
+            <div class="next-btn" id="steps-next-button" onclick="show('tips')">다음으로</div>
+        </div>
+
+        <div id="tips" class="screen">
+            <div class="header">맛있게 먹는 팁</div>
+            <div class="body">
+                <p>소스: 초간장 vs 파절이<br><br>페어링: 시원한 막걸리</p>
+            </div>
+            <div class="next-btn" id="tips-next-button" onclick="location.reload()">처음으로</div>
+        </div>
+    </div>
+
+    <script>
+        function show(id) {
+            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+        }
+    </script>
 </body>
 </html>
